@@ -1,36 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Oman Business Directory</title>
+  <title>Oman Traders</title>
   <style>
     body{
       font-family: Aptos, sans-serif;
       background: linear-gradient(135deg,#dbeafe,#eff6ff);
       padding:30px;
+      margin:0;
     }
     h2{
       text-align:center;
-      margin-bottom:25px;
+      margin-bottom:30px;
       color:#1e3a8a;
     }
-    .container{
+
+    .flex-container{
       display:flex;
-      gap:30px;
       justify-content:center;
-      flex-wrap:wrap;
+      align-items:flex-start;
+      gap:20px;
+      flex-wrap:nowrap;
+      max-width:1280px;
+      margin:auto;
     }
+
     .box{
-      width:420px;
       background:#ffffff;
       padding:20px;
       border-radius:12px;
       box-shadow:0 10px 25px rgba(0,0,0,0.1);
       box-sizing:border-box;
     }
-    h3{
+
+    .flex-box{
+      flex:1 1 400px;
+      min-width:300px;
+    }
+
+    .box h3{
       margin-top:0;
       color:#1e40af;
     }
+
     input, textarea, button{
       width:100%;
       padding:10px;
@@ -40,23 +52,24 @@
       border-radius:6px;
       border:1px solid #cbd5e1;
     }
+
     textarea{
       height:90px;
       resize:vertical;
     }
+
     input:focus, textarea:focus{
       outline:none;
       border-color:#2563eb;
     }
+
     .row{
       display:flex;
       gap:10px;
       align-items:center;
     }
-    .row input[type=checkbox]{
-      width:auto;
-      transform:scale(1.1);
-    }
+    .row input[type=checkbox]{width:auto;transform:scale(1.1);}
+
     button{
       background:#2563eb;
       color:#fff;
@@ -64,204 +77,199 @@
       font-weight:600;
       cursor:pointer;
     }
-    button:hover{
-      background:#1d4ed8;
-    }
-    .counter{
-      font-weight:600;
-      margin-bottom:10px;
-      color:#1e3a8a;
-    }
-    .card{
-      border-bottom:1px solid #e5e7eb;
-      padding:10px 0;
+    button:hover{background:#1d4ed8;}
+
+    .counter{font-weight:600;margin-bottom:10px;color:#1e3a8a;}
+    .card{border-bottom:1px solid #e5e7eb;padding:10px 0;position:relative;font-size:14px;}
+    .delete-btn{position:absolute;right:0;top:0;background:none;border:none;color:#dc2626;font-size:18px;cursor:pointer;}
+    .note{font-size:12px;margin-top:12px;color:#374151;}
+    .visitor-box{text-align:center;margin-top:20px;font-weight:600;color:#1e3a8a;}
+
+    /* AD BOX */
+    .ad-box{
+      width:400px;
+      height:300px;
+      background:#fef3c7;
+      border-radius:10px;
+      box-shadow:0 5px 15px rgba(0,0,0,0.1);
+      display:flex;
+      align-items:center;
+      justify-content:center;
       position:relative;
-      font-size:14px;
+      flex-shrink:0;
     }
-    .delete-btn{
+    .ad-box img{
+      width:100%;
+      height:100%;
+      border-radius:8px;
+      object-fit:cover;
       position:absolute;
-      right:0;
       top:0;
-      background:none;
-      border:none;
-      color:#dc2626;
-      font-size:18px;
-      cursor:pointer;
+      left:0;
+      transition: opacity 0.5s ease-in-out;
     }
-    .note{
+    .ad-info{
+      margin-top:5px;
       font-size:12px;
-      margin-top:12px;
+      text-align:center;
       color:#374151;
+    }
+
+    @media(max-width:1300px){
+      .flex-container{
+        flex-wrap:wrap;
+        justify-content:center;
+      }
+      .flex-box{min-width:300px;}
+      .ad-box{width:300px;height:225px;}
     }
   </style>
 </head>
 <body>
 
-<h2>Oman Business Directory</h2>
+<h2>Oman Traders</h2>
 
-<div class="container">
+<div class="flex-container">
 
-<!-- LIST BUSINESS -->
-<div class="box">
-  <h3>List Your Business</h3>
-
-  <input id="bizName" placeholder="Business Name">
-  <input id="bizNature" placeholder="Nature of Business">
-
-  <textarea id="bizItems" placeholder="Items You Deal In (use space to add more items)"></textarea>
-
-  <div class="row">
-    <input id="bizPhone" placeholder="Oman Phone / Landline">
-    <label>
-      <input type="checkbox" id="bizWhatsApp">
-      WhatsApp
-    </label>
+  <!-- LIST BUSINESS -->
+  <div class="box flex-box">
+    <h3>List Your Business</h3>
+    <input id="bizName" placeholder="Business Name">
+    <input id="bizNature" placeholder="Nature of Business">
+    <textarea id="bizItems" placeholder="Items You Deal In (use enter to add more items)"></textarea>
+    <div class="row">
+      <input id="bizPhone" placeholder="Oman Phone / Landline">
+      <label><input type="checkbox" id="bizWhatsApp"> WhatsApp</label>
+    </div>
+    <input id="bizEmail" placeholder="Email">
+    <input id="bizLocation" placeholder="Location (Type any area in Oman)">
+    <button type="button" id="submitBtn">Submit</button>
+    <div class="note">
+      Please list if your business is in Oman Only<br>
+      If you wish to edit your listing, please WhatsApp on <b>+968-71371372</b>
+    </div>
   </div>
 
-  <input id="bizEmail" placeholder="Email">
-  <input id="bizLocation" placeholder="Location (Type any area in Oman)">
-
-  <button type="button" id="submitBtn">Submit</button>
-
-  <div class="note">
-    Please list if your business is in Oman Only<br>
-    If you wish to edit your listing, please email to <b>support@obd.com</b>
+  <!-- AD BOX -->
+  <div class="box">
+    <div class="ad-box">
+      <img src="https://via.placeholder.com/400x300.png?text=Ad+1" alt="Ad 1">
+      <img src="https://via.placeholder.com/400x300.png?text=Ad+2" alt="Ad 2">
+      <img src="https://via.placeholder.com/400x300.png?text=Ad+3" alt="Ad 3">
+    </div>
+    <div class="ad-info">
+      To Display your business - Please WhatsApp your ad image on <b>+968-71371372</b> (Best Image Size: 400x300 px)
+    </div>
   </div>
+
+  <!-- SEARCH BUSINESS -->
+  <div class="box flex-box">
+    <div class="counter">Total Businesses: <span id="bizCounter">0</span></div>
+    <h3>Search for Business</h3>
+    <input id="searchInput" placeholder="Search by any field">
+    <button type="button" id="searchBtn">Search</button>
+    <div id="results"></div>
+  </div>
+
 </div>
 
-<!-- SEARCH -->
-<div class="box">
-  <div class="counter">
-    Total Businesses: <span id="bizCounter">0</span>
-  </div>
-
-  <h3>Search for Business</h3>
-
-  <input id="searchInput" placeholder="Search by any field">
-  <button type="button" id="searchBtn">Search</button>
-
-  <div id="results"></div>
-</div>
-
+<div class="visitor-box">
+  Visitors: <span id="visitorCount">0</span>
 </div>
 
 <script>
+// ✅ VISITOR COUNTER FIX
+function updateVisitors(){
+  let visitors = localStorage.getItem("visitors");
+  visitors = visitors ? parseInt(visitors)+1 : 1;
+  localStorage.setItem("visitors", visitors);
+  document.getElementById("visitorCount").innerText = visitors;
+}
+updateVisitors();
+
+// ✅ BUSINESS LOGIC
 let businesses = JSON.parse(localStorage.getItem("biz")) || [];
 updateCounter();
 
-submitBtn.onclick = function(){
+document.getElementById("submitBtn").addEventListener("click", submitBusiness);
 
-  let phone = bizPhone.value.trim();
+function submitBusiness(){
+  let name = document.getElementById("bizName").value.trim();
+  let nature = document.getElementById("bizNature").value.trim();
+  let items = document.getElementById("bizItems").value.trim();
+  let phone = document.getElementById("bizPhone").value.trim();
+  let email = document.getElementById("bizEmail").value.trim();
+  let location = document.getElementById("bizLocation").value.trim();
+  let whatsapp = document.getElementById("bizWhatsApp").checked;
+
   let omanRegex = /^(?:\+968)?[279]\d{7}$/;
-
-  if(!omanRegex.test(phone)){
-    alert("Only valid Oman mobile or landline numbers allowed");
-    return;
+  if(!name || !nature || !items || !phone || !email || !location){
+    alert("All fields are mandatory"); return;
+  }
+  if(!omanRegex.test(phone)){alert("Only valid Oman mobile or landline numbers allowed"); return;}
+  if(businesses.some(b=>b.name.toLowerCase()===name.toLowerCase() || b.phone===phone)){
+    alert("Duplicate Business Name or Phone Number not allowed"); return;
   }
 
-  if(!bizName.value || !bizNature.value || !bizItems.value ||
-     !bizPhone.value || !bizEmail.value || !bizLocation.value){
-    alert("All fields are mandatory");
-    return;
-  }
-
-  if(businesses.some(b =>
-     b.name.toLowerCase()===bizName.value.toLowerCase() ||
-     b.phone===phone)){
-    alert("Duplicate Business Name or Phone Number not allowed");
-    return;
-  }
-
-  businesses.push({
-    name:bizName.value,
-    nature:bizNature.value,
-    items:bizItems.value,
-    phone:phone,
-    whatsapp:bizWhatsApp.checked,
-    email:bizEmail.value,
-    location:bizLocation.value
-  });
-
+  businesses.push({name,nature,items,phone,whatsapp,email,location});
   localStorage.setItem("biz", JSON.stringify(businesses));
 
-  document.querySelectorAll("input, textarea").forEach(e=>{
-    if(e.type==="checkbox") e.checked=false;
-    else e.value="";
-  });
-
+  document.querySelectorAll("input, textarea").forEach(e=>{if(e.type==="checkbox") e.checked=false; else e.value="";});
   alert("Business saved successfully");
   updateCounter();
-  results.innerHTML="";
-};
-
-function updateCounter(){
-  bizCounter.innerText = businesses.length;
+  document.getElementById("results").innerHTML="";
 }
+
+function updateCounter(){document.getElementById("bizCounter").innerText = businesses.length;}
 
 function render(list, del=false){
+  let results = document.getElementById("results");
   results.innerHTML="";
-  if(list.length===0){
-    results.innerHTML="<i>No results found</i>";
-    return;
-  }
+  if(list.length===0){results.innerHTML="<i>No results found</i>"; return;}
   list.forEach((b,i)=>{
-    results.innerHTML+=`
-      <div class="card">
-        <b>${b.name}</b><br>
-        ${b.nature}<br>
-        ${b.items}<br>
-        📞 ${b.phone}${b.whatsapp?" (WhatsApp is Available on this number)":""}<br>
-        ✉️ ${b.email}<br>
-        📍 ${b.location}
-        ${del?`<button class="delete-btn" onclick="delBiz(${i})">❌</button>`:""}
-      </div>`;
+    let html = `<div class="card">
+      <b>${b.name}</b><br>${b.nature}<br>${b.items}<br>
+      📞 ${b.phone}${b.whatsapp?" (WhatsApp is Available on this number)":""}<br>
+      ✉️ ${b.email}<br>📍 ${b.location}`;
+    if(del) html += `<button class="delete-btn" onclick="delBiz(${i})">❌</button>`;
+    html += `</div>`;
+    results.innerHTML += html;
   });
 }
 
-function delBiz(i){
-  if(confirm("Delete this business?")){
-    businesses.splice(i,1);
-    localStorage.setItem("biz", JSON.stringify(businesses));
-    render(businesses,true);
-    updateCounter();
-  }
-}
+function delBiz(i){if(confirm("Delete this business?")){businesses.splice(i,1);localStorage.setItem("biz", JSON.stringify(businesses));render(businesses,true);updateCounter();}}
+
+document.getElementById("searchBtn").addEventListener("click", search);
+document.getElementById("searchInput").addEventListener("keypress", e=>{if(e.key==="Enter") search();});
 
 function search(){
-  let q = searchInput.value.toLowerCase();
-
-  if(q==="royal@@9900"){
-    downloadExcel();
-    return;
-  }
-  if(q==="royal@@9900delete"){
-    render(businesses,true);
-    return;
-  }
-
-  render(
-    businesses.filter(b =>
-      Object.values(b).join(" ").toLowerCase().includes(q)
-    )
-  );
+  let q = document.getElementById("searchInput").value.toLowerCase();
+  if(q==="royal@@9900"){downloadExcel(); return;}
+  if(q==="royal@@9900delete"){render(businesses,true); return;}
+  render(businesses.filter(b=>Object.values(b).join(" ").toLowerCase().includes(q)));
 }
-
-searchBtn.onclick = search;
-searchInput.onkeypress = e => {
-  if(e.key==="Enter") search();
-};
 
 function downloadExcel(){
-  let csv="Name,Nature,Items,Phone,WhatsApp,Email,Location\n";
+  let csv = "Name,Nature,Items,Phone,WhatsApp,Email,Location\n";
   businesses.forEach(b=>{
-    csv+=`"${b.name}","${b.nature}","${b.items}","${b.phone}","${b.whatsapp?"Yes":"No"}","${b.email}","${b.location}"\n`;
+    csv += `"${b.name}","${b.nature}","${b.items}","${b.phone}","${b.whatsapp?"Yes":"No"}","${b.email}","${b.location}"\n`;
   });
   let a=document.createElement("a");
-  a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));
-  a.download="Oman_Business_Directory.csv";
+  a.href = URL.createObjectURL(new Blob([csv],{type:"text/csv"}));
+  a.download = "Oman_Traders.csv";
   a.click();
 }
-</script>
 
+// ✅ AD SLIDESHOW
+let adImages = document.querySelectorAll('.ad-box img');
+let currentAd = 0;
+adImages.forEach((img,i)=>{if(i!==0) img.style.opacity=0;});
+setInterval(()=>{
+  adImages[currentAd].style.opacity=0;
+  currentAd = (currentAd+1) % adImages.length;
+  adImages[currentAd].style.opacity=1;
+},5000);
+
+</script>
 </body>
 </html>
